@@ -49,9 +49,9 @@ public class Sheet {
     @Test
     public void run() throws GeneralSecurityException, IOException {
         sheet = getSheetService();
-        String range = "Blogs-Q3-AMJ-2022";
+        //String range = "Blogs-Q3-AMJ-2022";
         ValueRange response = sheet.spreadsheets().values()
-                .get(SheetId, range)
+                .get(SheetId, "Blogs-Q3-AMJ-2022")
                 .execute();
 
         List<List<Object>> values = response.getValues();
@@ -60,7 +60,6 @@ public class Sheet {
         } else {
             for (List row : values) {
                 System.out.printf("%s -- %s -- %s -- %s\n", row.get(0), row.get(1), row.get(2), row.get(3));
-                System.out.println("row data "+ row);
             }
         }
 
