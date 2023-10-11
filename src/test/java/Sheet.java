@@ -20,7 +20,7 @@ import java.util.List;
 
 public class Sheet {
 
-    private static Sheets sheet;
+    private static Sheets sheetData;
     private static String ApplicationName = "Extract-data-from-sheet";
     private static String SheetId = "1jNX0daEEoKcAkUi0NwmEibIHOoryOzozfSak2n89ymQ";
 
@@ -48,16 +48,18 @@ public class Sheet {
 
     @Test
     public void run() throws GeneralSecurityException, IOException {
-        sheet = getSheetService();
+        sheetData = getSheetService();
         //String range = "Blogs-Q3-AMJ-2022";
-        ValueRange response = sheet.spreadsheets().values()
+        ValueRange response = sheetData.spreadsheets().values()
                 .get(SheetId, "Blogs-Q3-AMJ-2022")
                 .execute();
-
+// setup all the data in sheetData variable.
+        //check the data in sheet using values variable.
         List<List<Object>> values = response.getValues();
         if (values == null || values.isEmpty()) {
             System.out.println("No data");
         } else {
+            System.out.println(values);
             for (List row : values) {
                 System.out.printf("%s -- %s -- %s -- %s\n", row.get(0), row.get(1), row.get(2), row.get(3));
             }
